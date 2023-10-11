@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>DNOO37 | BOOTSTRAP 5.3.2</title>
+        <!--El CSS de Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <!--Que luego puedo complementar-->
+        <style>
+            .active {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body class="bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(10px)">
+            <div class="container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="FireBrick" viewBox="0 0 100 100">
+<title>25_Warning_sign_v15</title>
+<path d="M82.23,88.22H8.92c-2.22,0-3.57-1.11-3.57-3a4.63,4.63,0,0,1,.61-2l1.48-2.58H77.92ZM54.8,14.05l-2.34-3.69a3.2,3.2,0,0,0-2.58-1.72,2.91,2.91,0,0,0-2.59,1.72L10,76H20.48ZM49.88,75.67A5.17,5.17,0,1,1,55,70.51,5.21,5.21,0,0,1,49.88,75.67Zm0-13.9c-2.34,0-4.06-1.72-4.31-5.16L45,45.78a4.77,4.77,0,0,1,4.92-4.92A4.91,4.91,0,0,1,55,45.78L54.3,56.61C54.06,60.05,52.34,61.77,49.88,61.77Zm2.21-33.58,35.06,60h4.18a3,3,0,0,0,3.32-3.08,3.44,3.44,0,0,0-.49-1.84L57.26,19Z"></path>
+</svg>
+                <a class="navbar-brand" href="index.html">MARÍA JOSÉ GAETE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">INDEX</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="integrantes.html">INTEGRANTES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="openweather.html">OPEN WEATHER</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="picture.html">PICTURE OF THE DAY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="sismico.html">SÍSMICO</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <header class="container mt-5">
+              <div class="row pt-5">
+                <div class="col">
+                    <p class="lead">Sólo Chile, <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" target="_blank" class="link-dark"rel="noreferrer noopener">registrados por la USGS</a> en el último mes.</p>
+                </div>
+        </header>
+        <main class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 pb-5" id="todes">
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <script>
+            const seccion = document.querySelector("#todes");
+
+            // Una función asincrónica para el fetch
+
+            async function temblores() {
+                const data = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson");
+                datos = await data.json();
+                 datos.features.forEach((t, i) => {
+                    if (t.properties.place.includes("Chile") && t.properties.mag > 4.0) {
+                        if (t.properties.mag > 4.9) {
+                            seccion.innerHTML += `<article class="col mb-3"><div class="card bg-danger bg-opacity-75 text-white h-100 border-0 shadow-sm"><div class="d-flex align-items-center"><div class="p-3"><h3 class="display-4">${t.properties.mag.toFixed(1)}</h3></div><div class="p-3 ps-2"><p class="text-body small p-0 m-0"><a href="${t.properties.url}" target="_blank" class="link-light link-underline-opacity-50 link-underline-opacity-100-hover" rel="noopener noreferrer">${t.properties.place}</a><br/><small>${registro(t.properties.time)}</small></p></div></div></div></article>`;
+                        } else {
+                            seccion.innerHTML += `<article class="col mb-3"><div class="card h-100 border-0 shadow-sm"><div class="d-flex align-items-center"><div class="p-3"><h3 class="display-4">${t.properties.mag.toFixed(
+                                1)}</h3></div><div class="p-3 ps-2"><p class="text-body small p-0 m-0"><a href="${t.properties.url}" target="_blank" class="link-secondary" rel="noopener noreferrer">${t.properties.place}</a><br/><small>${registro(t.properties.time)}</small></p></div></div></div></article>`;
+                        }
+                    }
+                });
+                cargador.style.display = "none";
+            }
+            temblores().catch((error) => console.error(error));
+
+            // Una función que ajusta la hora
+
+            function registro(timestamp) {
+                var date = new Date(timestamp);
+                return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} a las ${(date.getHours() < 10 ? "0" : "") + date.getHours()}:${(date.getMinutes() < 10 ? "0" : "") + date.getMinutes()} hrs.`;
+            }
+        </script>
+    </body>
+</html>
