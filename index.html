@@ -13,7 +13,7 @@
             }
         </style>
     </head>
-    <body class="bg-body-tertiary">
+    <body class="bg-primary-subtle text-dark">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(10px)">
             <div class="container">
                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="DarkMagenta" class="bi bi-controller" viewBox="0 0 16 16">
@@ -75,7 +75,7 @@
                 const frase = datos[x].motivo;
                 const link = datos[x].github;
                 console.log(frase);
-                document.querySelector("#texto").innerHTML = `<p class="display-5">${frase} Y puedes ver mi progreso este semestre en mi cuenta de <a href="${link}?tab=repositories" target="_blank" class="link-dark link-underline-opacity-25 link-underline-opacity-100-hover">GitHub</a></p>`;
+                document.querySelector("#texto").innerHTML = `<p class="display-5">${frase} Y puedes ver mi progreso este semestre en mi cuenta de <a href="${link}?tab=repositories" target="_blank" class="link-dark link-offset-1 link-underline-opacity-25 link-underline-opacity-100-hover">GitHub</a></p>`;
             }
             frase(7).catch((error) => console.error(error));
         </script>

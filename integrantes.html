@@ -13,7 +13,7 @@
             }
         </style>
     </head>
-    <body class="bg-body-tertiary">
+    <body class="bg-success-subtle text-dark">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="backdrop-filter: blur(10px)">
             <div class="container">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
@@ -102,7 +102,7 @@
 
                 datos.forEach((x) => {
                     if (valor == x.zodiaco.modalidad) {
-                        respuesta.innerHTML += `<article class="col mb-3"><div class="card h-100 border-0 shadow-sm"><div class="row g-0 align-items-center"><div class="col-3 col-sm-4 p-2"><img src="${x.avatar}" alt="${x.lista}" class="rounded-circle img-fluid"></div><div class="col-9 col-sm-8"><div class="card-body"><p class="card-text small"><a href="integrante.html?lista=${x.lista}" class="link-dark link-underline-opacity-25 link-underline-opacity-100-hover">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a><br/><small class="text-body-secondary">${x.zodiaco.signo}</small></p></div></div></div></div></article>`;
+                        respuesta.innerHTML += `<article class="col mb-3"><div class="card h-100 border-0 shadow-sm"><div class="row g-0 align-items-center"><div class="col-3 col-sm-4 p-2"><img src="${x.avatar}" alt="${x.lista}" class="rounded-circle img-fluid"></div><div class="col-9 col-sm-8"><div class="card-body"><p class="card-text small"><a href="integrante.html?lista=${x.lista}" class="link-body-emphasis link-underline-opacity-25 link-underline-opacity-100-hover">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a><br/><small class="text-body-secondary">${x.zodiaco.signo}</small></p></div></div></div></div></article>`;
                     }
                 });
             }
